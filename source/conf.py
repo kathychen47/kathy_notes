@@ -20,6 +20,7 @@ release = '0.1'
 
 extensions = [
     'sphinx.ext.duration',
+    'sphinx_disqus.disqus',
     'sphinx.ext.doctest',
     'myst_parser'
     ]

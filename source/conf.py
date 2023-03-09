@@ -22,9 +22,9 @@ extensions = [
     'sphinx.ext.duration',
     'sphinx_disqus.disqus',
     'sphinx.ext.doctest',
-    'myst_parser'
+    'myst_parser',
     ]
-
+disqus_shortname = "httpbbk0701githubiomysiteoutput"
 templates_path = ['_templates']
 exclude_patterns = []
 

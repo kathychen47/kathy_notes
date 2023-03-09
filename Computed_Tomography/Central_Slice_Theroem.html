@@ -1,0 +1,633 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
+        <title>Central Slice Theorem - Learning Notes 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">Learning Notes 0.1 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">Learning Notes 0.1 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Computed_Tomography</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="central-slice-theorem">
+<h1>Central Slice Theorem<a class="headerlink" href="#central-slice-theorem" title="Permalink to this headline">#</a></h1>
+<p>It states that the one-dimensional Fourier transformer of the projection of a function or $image(x,y)$ along a direction $\theta$, is equal to a vertical slice two dimensional Fourier transform $F(\omega_1, \omega_2)$ of $f(x,y)$ passing through the origin and oriented at an angle $\theta$ with respect to the $$\omega_1$$ axis.</p>
+<p>Assume $t\text{-}s$ is a rotated coordinate system according to $x\text{-}y$.</p>
+<p>Slice $f(x,y)$ in $x\text{-}y$ coordinate is shown as $f^{‘}(t,s)$ in $t\text{-}s$ coordinate system.</p>
+<p>$$ f^{‘}(t,s) = \int_0^\pi  {d\theta } \int_{ - \infty }^{ + \infty } {P(\omega ,\theta )\left| \omega  \right|} {e^{2\pi \omega t}}d\omega $$</p>
+</section>
+<section id="fbp">
+<h1>FBP<a class="headerlink" href="#fbp" title="Permalink to this headline">#</a></h1>
+<section id="codes-for-fbp">
+<h2>Codes for FBP<a class="headerlink" href="#codes-for-fbp" title="Permalink to this headline">#</a></h2>
+<p>Tomographic reconstruction steps:</p>
+<p>根据代码中的 <code class="docutils literal notranslate"><span class="pre">print(proj.shape,</span> <span class="pre">flat.shape,</span> <span class="pre">dark.shape,</span> <span class="pre">theta.shape)</span></code>，四个参数的含义如下：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">proj</span></code>: 形状为 <code class="docutils literal notranslate"><span class="pre">(num_angles,</span> <span class="pre">num_channels,</span> <span class="pre">num_slices)</span></code> 的三维 numpy 数组，表示待重构的投影数据。其中，<code class="docutils literal notranslate"><span class="pre">num_angles</span></code> 是投影角度数，<code class="docutils literal notranslate"><span class="pre">num_channels</span></code> 是每个角度下的通道数（也可以称为像素数），<code class="docutils literal notranslate"><span class="pre">num_slices</span></code> 是待重构的切片数（即待重构的三维物体的层数）。因为代码中使用了 <code class="docutils literal notranslate"><span class="pre">sino=(0,</span> <span class="pre">2)</span></code> 参数，所以只选择了两个投影角度（即 <code class="docutils literal notranslate"><span class="pre">num_angles=2</span></code>），这也导致了 <code class="docutils literal notranslate"><span class="pre">proj</span></code> 的形状是 <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">num_channels,</span> <span class="pre">num_slices)</span></code>。因为 <code class="docutils literal notranslate"><span class="pre">proj</span></code> 是待重构的投影数据，所以每个像素点的数值代表了射线在穿过物体时的衰减量，可以用于重构三维物体。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flat</span></code>: 形状与 <code class="docutils literal notranslate"><span class="pre">proj</span></code> 相同的三维 numpy 数组，表示用于校准的 flat field 数据。因为校准的 flat field 数据和待重构的投影数据的形状必须相同，所以 <code class="docutils literal notranslate"><span class="pre">flat</span></code> 的形状也是 <code class="docutils literal notranslate"><span class="pre">(num_angles,</span> <span class="pre">num_channels,</span> <span class="pre">num_slices)</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dark</span></code>: 形状与 <code class="docutils literal notranslate"><span class="pre">proj</span></code> 相同的三维 numpy 数组，表示用于校准的 dark field 数据。因为校准的 dark field 数据和待重构的投影数据的形状必须相同，所以 <code class="docutils literal notranslate"><span class="pre">dark</span></code> 的形状也是 <code class="docutils literal notranslate"><span class="pre">(num_angles,</span> <span class="pre">num_channels,</span> <span class="pre">num_slices)</span></code>。dark field 数据一般用于校准探测器的漂移和噪声等问题。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">theta</span></code>: 形状为 <code class="docutils literal notranslate"><span class="pre">(num_angles,)</span></code> 的一维 numpy 数组，表示所有投影角度的值。因为在代码中使用了 <code class="docutils literal notranslate"><span class="pre">sino=(0,</span> <span class="pre">2)</span></code> 参数，所以只选择了两个投影角度，即 <code class="docutils literal notranslate"><span class="pre">theta</span></code> 的长度是 2。<code class="docutils literal notranslate"><span class="pre">theta</span></code> 一般用于控制投影角度，可以通过改变 <code class="docutils literal notranslate"><span class="pre">theta</span></code> 的值来获取不同的投影数据，从而用于重构不同的三维物体。</p></li>
+<li></li>
+<li><p>According to the code <code class="docutils literal notranslate"><span class="pre">print(proj.shape,</span> <span class="pre">flat.shape,</span> <span class="pre">dark.shape,</span> <span class="pre">theta.shape)</span></code>, the four parameters mean the following:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">proj</span></code>: a three-dimensional numpy array of shape <code class="docutils literal notranslate"><span class="pre">(num_angles,</span> <span class="pre">num_channels,</span> <span class="pre">num_slices)</span></code>, representing the projection data to be reconstructed. Here, <code class="docutils literal notranslate"><span class="pre">num_angles</span></code> is the number of projection angles, <code class="docutils literal notranslate"><span class="pre">num_channels</span></code> is the number of pixels per angle (also known as the number of detector channels), and <code class="docutils literal notranslate"><span class="pre">num_slices</span></code> is the number of slices to be reconstructed (i.e., the number of layers of the three-dimensional object to be reconstructed). Because <code class="docutils literal notranslate"><span class="pre">sino=(0,</span> <span class="pre">2)</span></code> is used in the code, only two projection angles are selected (i.e., <code class="docutils literal notranslate"><span class="pre">num_angles=2</span></code>), which leads to the shape of <code class="docutils literal notranslate"><span class="pre">proj</span></code> being <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">num_channels,</span> <span class="pre">num_slices)</span></code>. As the projection data to be reconstructed, the value of each pixel represents the attenuation of the X-ray beam when passing through the object, which can be used to reconstruct the three-dimensional object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flat</span></code>: a three-dimensional numpy array of the same shape as <code class="docutils literal notranslate"><span class="pre">proj</span></code>, representing the flat field data used for calibration. Because the shape of the flat field data used for calibration must be the same as that of the projection data to be reconstructed, the shape of <code class="docutils literal notranslate"><span class="pre">flat</span></code> is also <code class="docutils literal notranslate"><span class="pre">(num_angles,</span> <span class="pre">num_channels,</span> <span class="pre">num_slices)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dark</span></code>: a three-dimensional numpy array of the same shape as <code class="docutils literal notranslate"><span class="pre">proj</span></code>, representing the dark field data used for calibration. Because the shape of the dark field data used for calibration must be the same as that of the projection data to be reconstructed, the shape of <code class="docutils literal notranslate"><span class="pre">dark</span></code> is also <code class="docutils literal notranslate"><span class="pre">(num_angles,</span> <span class="pre">num_channels,</span> <span class="pre">num_slices)</span></code>. The dark field data is generally used to correct for detector drift and noise.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">theta</span></code>: a one-dimensional numpy array of shape <code class="docutils literal notranslate"><span class="pre">(num_angles,)</span></code>, representing the values of all projection angles. Because <code class="docutils literal notranslate"><span class="pre">sino=(0,</span> <span class="pre">2)</span></code> is used in the code, only two projection angles are selected, so the length of <code class="docutils literal notranslate"><span class="pre">theta</span></code> is 2. <code class="docutils literal notranslate"><span class="pre">theta</span></code> is generally used to control the projection angles and can be modified to obtain different projection data for reconstructing different three-dimensional objects.</p></li>
+</ul>
+</li>
+<li></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">h5py</span>
+
+<span class="c1"># Load the data</span>
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;tooth.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">proj</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;exchange/data&#39;</span><span class="p">][</span><span class="n">sino</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">sino</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">flat</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;exchange/data_white&#39;</span><span class="p">][()]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">dark</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;exchange/data_dark&#39;</span><span class="p">][()]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;exchange/theta&#39;</span><span class="p">][()]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="c1"># Normalize the data</span>
+<span class="n">proj</span> <span class="o">=</span> <span class="p">(</span><span class="n">proj</span> <span class="o">-</span> <span class="n">dark</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">flat</span> <span class="o">-</span> <span class="n">dark</span><span class="p">)</span>
+
+<span class="c1"># Calculate the sinogram center</span>
+<span class="n">center</span> <span class="o">=</span> <span class="n">proj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span>
+
+<span class="c1"># Define the reconstruction parameters</span>
+<span class="n">num_slices</span> <span class="o">=</span> <span class="n">proj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">num_cols</span> <span class="o">=</span> <span class="n">proj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">num_rows</span> <span class="o">=</span> <span class="n">num_cols</span>
+
+<span class="c1"># Initialize the reconstruction volume</span>
+<span class="n">recon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_slices</span><span class="p">,</span> <span class="n">num_rows</span><span class="p">,</span> <span class="n">num_cols</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="c1"># Perform the backprojection</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_slices</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reconstructing slice </span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_slices</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_proj</span><span class="p">):</span>
+        <span class="c1"># Calculate the projection angle</span>
+        <span class="n">ang</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span>
+
+        <span class="c1"># Calculate the projection offset</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="n">center</span>
+
+        <span class="c1"># Calculate the backprojection angle</span>
+        <span class="n">bp_ang</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="n">center</span><span class="p">)</span>
+
+        <span class="c1"># Calculate the distance from the center</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">offset</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">center</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># Calculate the backprojection weight</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">bp_ang</span><span class="p">)</span> <span class="o">/</span> <span class="n">dist</span>
+
+        <span class="c1"># Backproject the projection data</span>
+        <span class="n">recon</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">proj</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+
+<span class="c1"># Normalize the reconstructed volume</span>
+<span class="n">recon</span> <span class="o">/=</span> <span class="n">num_proj</span>
+
+<span class="c1"># Save the reconstructed volume</span>
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;recon.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;recon&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">recon</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This code reads in the projection data (<code class="docutils literal notranslate"><span class="pre">proj</span></code>), flat field data (<code class="docutils literal notranslate"><span class="pre">flat</span></code>), dark field data (<code class="docutils literal notranslate"><span class="pre">dark</span></code>), and projection angles (<code class="docutils literal notranslate"><span class="pre">theta</span></code>) from the <code class="docutils literal notranslate"><span class="pre">tooth.h5</span></code> file, performs normalization on the projection data, and calculates the sinogram center. It then initializes the reconstruction volume (<code class="docutils literal notranslate"><span class="pre">recon</span></code>) with zeros and performs the back projection to reconstruct the CT images. Finally, it normalizes the reconstructed volume and saves it to a new <code class="docutils literal notranslate"><span class="pre">recon.h5</span></code> file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">h5py</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">fbp_reconstruction</span><span class="p">(</span><span class="n">proj</span><span class="p">,</span> <span class="n">flat</span><span class="p">,</span> <span class="n">dark</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    使用中心极限定理实现FBP重建</span>
+<span class="sd">    :param proj: 投影数据，形状为(n_theta, n_s)</span>
+<span class="sd">    :param flat: 平坦场数据，形状为(n_theta, n_s)</span>
+<span class="sd">    :param dark: 暗场数据，形状为(n_theta, n_s)</span>
+<span class="sd">    :param theta: 投影角度，形状为(n_theta,)</span>
+<span class="sd">    :return: 重建图像，形状为(n_s, n_s)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># 预处理平坦场和暗场数据</span>
+    <span class="n">flat</span> <span class="o">=</span> <span class="p">(</span><span class="n">flat</span> <span class="o">-</span> <span class="n">dark</span><span class="p">)</span> <span class="o">/</span> <span class="n">flat</span>
+    <span class="n">flat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">flat</span><span class="p">)</span>
+
+    <span class="c1"># 投影数据加上小常数，避免对数运算时出现无穷大</span>
+    <span class="n">proj</span> <span class="o">=</span> <span class="n">proj</span> <span class="o">+</span> <span class="mf">1e-12</span>
+
+    <span class="c1"># 将投影数据转换为对数空间</span>
+    <span class="n">proj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">proj</span><span class="p">)</span>
+
+    <span class="c1"># 重建图像大小</span>
+    <span class="n">n_s</span> <span class="o">=</span> <span class="n">proj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># 构建投影矩阵</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n_s</span><span class="o">+</span><span class="mi">1</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">proj_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">(</span><span class="n">proj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">(</span><span class="n">proj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">proj_mat</span><span class="p">[</span><span class="n">proj_mat</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">proj_mat</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">proj_mat</span> <span class="o">/</span> <span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="c1"># 进行重建</span>
+    <span class="n">reconstruction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_s</span><span class="p">,</span> <span class="n">n_s</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">proj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="c1"># 使用中心极限定理计算傅里叶变换</span>
+        <span class="n">ft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">proj</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="c1"># 滤波</span>
+        <span class="n">filtered_ft</span> <span class="o">=</span> <span class="n">ft</span> <span class="o">*</span> <span class="n">proj_mat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="c1"># 逆傅里叶变换</span>
+        <span class="n">filtered_proj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifftshift</span><span class="p">(</span><span class="n">filtered_ft</span><span class="p">)))</span>
+        <span class="c1"># 使用中心极限定理计算重建图像</span>
+        <span class="n">reconstruction</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">filtered_proj</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="c1"># 根据投影角度进行归一化</span>
+    <span class="n">reconstruction</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+
+    <span class="c1"># 根据预处理的平坦场进行反投影校正</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">proj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">ft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">proj</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">flat</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
+        <span class="n">filtered_ft</span> <span class="o">=</span> <span class="n">ft</span> <span class="o">*</span> <span class="n">proj_mat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">filtered_proj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifftshift</span><span class="p">(</span><span class="n">filtered_ft</span><span class="p">)))</span>
+        <span class="n">reconstruction</span> <span class="o">-=</span> <span class="n">filtered_proj</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="c1"># 归一化</span>
+    <span class="n">reconstruction</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">proj_mat</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">reconstruction</span>
+
+<span class="c1"># 读取数据</span>
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;tooth.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">proj</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;exchange/data&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
+    <span class="n">flat</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;exchange/data_white&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
+    <span class="n">dark</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;exchange/data_dark&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;exchange/theta&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
+
+<span class="c1"># 选择部分投影数据进行重建</span>
+<span class="n">proj</span> <span class="o">=</span> <span class="n">proj</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>
+<span class="c1"># 进行重建</span>
+<span class="n">reconstruction</span> <span class="o">=</span> <span class="n">fbp_reconstruction</span><span class="p">(</span><span class="n">proj</span><span class="p">,</span> <span class="n">flat</span><span class="p">,</span> <span class="n">dark</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+
+<span class="c1"># 显示重建图像</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">reconstruction</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pythonCopy</span> <span class="n">codeimport</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">h5py</span>
+
+<span class="k">def</span> <span class="nf">fbp_reconstruction</span><span class="p">(</span><span class="n">proj</span><span class="p">,</span> <span class="n">flat</span><span class="p">,</span> <span class="n">dark</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    使用中心极限定理实现FBP重建</span>
+<span class="sd">    :param proj: 投影数据，形状为(n_theta, n_s)</span>
+<span class="sd">    :param flat: 平坦场数据，形状为(n_theta, n_s)</span>
+<span class="sd">    :param dark: 暗场数据，形状为(n_theta, n_s)</span>
+<span class="sd">    :param theta: 投影角度，形状为(n_theta,)</span>
+<span class="sd">    :return: 重建图像，形状为(n_s, n_s)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># 预处理平坦场和暗场数据</span>
+    <span class="n">flat</span> <span class="o">=</span> <span class="p">(</span><span class="n">flat</span> <span class="o">-</span> <span class="n">dark</span><span class="p">)</span> <span class="o">/</span> <span class="n">flat</span>
+    <span class="n">flat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">flat</span><span class="p">)</span>
+
+    <span class="c1"># 投影数据加上小常数，避免对数运算时出现无穷大</span>
+    <span class="n">proj</span> <span class="o">=</span> <span class="n">proj</span> <span class="o">+</span> <span class="mf">1e-12</span>
+
+    <span class="c1"># 将投影数据转换为对数空间</span>
+    <span class="n">proj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">proj</span><span class="p">)</span>
+
+    <span class="c1"># 重建图像大小</span>
+    <span class="n">n_s</span> <span class="o">=</span> <span class="n">proj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># 构建投影矩阵</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n_s</span><span class="o">+</span><span class="mi">1</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">proj_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">(</span><span class="n">proj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">(</span><span class="n">proj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">proj_mat</span><span class="p">[</span><span class="n">proj_mat</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">proj_mat</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">proj_mat</span> <span class="o">/</span> <span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="c1"># 进行重建</span>
+    <span class="n">reconstruction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_s</span><span class="p">,</span> <span class="n">n_s</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">proj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="c1"># 使用中心极限定理计算傅里叶变换</span>
+        <span class="n">ft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_s</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_s</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_s</span><span class="p">):</span>
+                <span class="n">ft</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">proj</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">j</span> <span class="o">*</span> <span class="n">k</span> <span class="o">/</span> <span class="n">n_s</span><span class="p">)</span>
+
+        <span class="c1"># 滤波</span>
+        <span class="n">filtered_ft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_s</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_s</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_s</span><span class="p">):</span>
+                <span class="n">filtered_ft</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">ft</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">proj_mat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="n">n_s</span><span class="o">//</span><span class="mi">2</span><span class="p">]</span>
+
+        <span class="c1"># 逆傅里叶变换</span>
+        <span class="n">filtered_proj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_s</span><span class="p">,))</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_s</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_s</span><span class="p">):</span>
+                <span class="n">filtered_proj</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">filtered_ft</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">j</span> <span class="o">*</span> <span class="n">k</span> <span class="o">/</span> <span class="n">n_s</span><span class="p">)</span>
+
+        <span class="c1"># 使用中心极限定理计算重建图像</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_s</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_s</span><span class="p">):</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">filtered_proj</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">reconstruction</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">s</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">s</span><span class="p">))</span>
+
+    <span class="c1"># 根据投影角度进行归一化</span>
+    <span class="n">reconstruction</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">reconstruction</span>
+</pre></div>
+</div>
+<p>在这个版本的代码中，我添加</p>
+<p>![img](data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2730%27%20height=%2730%27/%3e)<img alt="Kathy Chen" src="https://chat.openai.com/_next/image?url=https%3A%2F%2Flh3.googleusercontent.com%2Fa%2FAGNmyxaDYmERjMwydPr4csjMJ-5koyZ7nO9tH33CkB-F%3Ds96-c&amp;w=64&amp;q=75" /></p>
+<p>继续</p>
+<p><img alt="image-20230309180038525" src="https://lh3.googleusercontent.com/9cB7NiX0DCZbNPd1rrhlcVGwMTq5siTft5L3Ju8--bFsIBU8JeQjJ8vyLVQBbMO9u_B2o3HNvDklD9GHuKBFOEpWcYdicR7Rc1G2rD4V" /></p>
+<p>在上一个回答中，我添加了更详细的代码，包含了一些公式。以下是这个代码的解释：</p>
+<ol class="arabic">
+<li><p><code class="docutils literal notranslate"><span class="pre">flat</span></code> 和 <code class="docutils literal notranslate"><span class="pre">dark</span></code> 数据进行预处理，使用以下公式将其转换为对数空间：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">makefileCopy</span> <span class="n">codeflat</span> <span class="o">=</span> <span class="p">(</span><span class="n">flat</span> <span class="o">-</span> <span class="n">dark</span><span class="p">)</span> <span class="o">/</span> <span class="n">flat</span>
+<span class="n">flat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">flat</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>将投影数据转换为对数空间，使用以下代码：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cCopy</span> <span class="n">code</span>
+<span class="n">proj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">proj</span> <span class="o">+</span> <span class="mf">1e-12</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>注意，我们在投影数据上加上一个小常数，避免对数运算时出现无穷大。</p>
+</li>
+<li><p>构建投影矩阵，使用以下公式：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cssCopy</span> <span class="n">codep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n_s</span><span class="o">+</span><span class="mi">1</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">proj_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">(</span><span class="n">proj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">(</span><span class="n">proj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">proj_mat</span><span class="p">[</span><span class="n">proj_mat</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">proj_mat</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">proj_mat</span> <span class="o">/</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>这里 <code class="docutils literal notranslate"><span class="pre">p</span></code> 是一个均匀分布的采样点，投影矩阵可以使用 <code class="docutils literal notranslate"><span class="pre">proj_mat</span></code> 计算，这个矩阵定义了在傅里叶空间内的滤波操作。</p>
+</li>
+<li><p>对每个投影进行重建，使用以下步骤：</p>
+<p>a. 使用中心极限定理计算傅里叶变换，使用以下代码：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scssCopy</span> <span class="n">codeft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_s</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_s</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_s</span><span class="p">):</span>
+        <span class="n">ft</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">proj</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">j</span> <span class="o">*</span> <span class="n">k</span> <span class="o">/</span> <span class="n">n_s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>b. 滤波傅里叶变换，使用以下代码：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">goCopy</span> <span class="n">codefiltered_ft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_s</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_s</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_s</span><span class="p">):</span>
+        <span class="n">filtered_ft</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">ft</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">proj_mat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="n">n_s</span><span class="o">//</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>c. 使用中心极限定理计算逆傅里叶变换，使用以下代码：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scssCopy</span> <span class="n">codefiltered_proj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_s</span><span class="p">,))</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_s</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_s</span><span class="p">):</span>
+        <span class="n">filtered_proj</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">filtered_ft</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">j</span> <span class="o">*</span> <span class="n">k</span> <span class="o">/</span> <span class="n">n_s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>d. 使用中心极限定理计算重建图像，使用以下代码：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scssCopy</span> <span class="n">codefor</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_s</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_s</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">filtered_proj</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="n">reconstruction</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">s</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">s</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+<li><p>根据投影角度进行归一化，使用以下代码：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sqlCopy</span> <span class="n">code</span>
+<span class="n">reconstruction</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>以上就是更详细的代码解释。</p>
+<p>![img](data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2730%27%20height=%2730%27/%3e)<img alt="Kathy Chen" src="https://chat.openai.com/_next/image?url=https%3A%2F%2Flh3.googleusercontent.com%2Fa%2FAGNmyxaDYmERjMwydPr4csjMJ-5koyZ7nO9tH33CkB-F%3Ds96-c&amp;w=64&amp;q=75" /></p>
+<p>可以再加一个可视化代码吗</p>
+<p>当然可以，以下是一个简单的可视化代码，用于显示重建图像：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pythonCopy</span> <span class="n">codeimport</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">reconstruction</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>这个代码使用 Matplotlib 库绘制灰度图像。<code class="docutils literal notranslate"><span class="pre">cmap='gray'</span></code> 参数指定使用灰度颜色映射，<code class="docutils literal notranslate"><span class="pre">plt.axis('off')</span></code> 参数关闭图像坐标轴。如果你想将图像保存到文件，可以使用以下代码：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pythonCopy</span> <span class="n">code</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;reconstruction.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>其中，<code class="docutils literal notranslate"><span class="pre">dpi=300</span></code> 指定保存图像的分辨率为 300 dpi，<code class="docutils literal notranslate"><span class="pre">bbox_inches='tight'</span></code> 用于裁剪图像边缘。</p>
+<p>CT重建是一种将X射线投影转换为三维图像的过程。其中一种常用的重建算法是滤波反投影算法（FBP）。在此，我们将演示如何使用中心极限定理（Central Limit Theorem）和FBP算法重建CT图像。</p>
+<p>由于题目要求不使用任何包，我们需要手动实现CT重建过程。首先，我们读取数据集并进行预处理。我们首先对每个投影减去它对应的暗场（dark field），然后将每个投影减去对应的平场（flat field）并除以平场。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pythonCopy</span> <span class="n">code</span><span class="c1"># 读取数据集并进行预处理</span>
+<span class="kn">import</span> <span class="nn">h5py</span>
+
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;tooth.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">proj</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;exchange/data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">flat</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;exchange/data_white&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">dark</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;exchange/data_dark&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;exchange/theta&#39;</span><span class="p">][:]</span>
+    
+<span class="n">proj</span> <span class="o">-=</span> <span class="n">dark</span>
+<span class="n">proj</span> <span class="o">=</span> <span class="p">(</span><span class="n">proj</span> <span class="o">-</span> <span class="n">flat</span><span class="p">)</span> <span class="o">/</span> <span class="n">flat</span>
+</pre></div>
+</div>
+<p>接下来，我们需要实现一个函数，将一维投影数据集proj_i通过逆Radon变换重建为二维图像。在此，我们将使用中心极限定理来平滑投影数据集并减少噪声。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pythonCopy</span> <span class="n">code</span><span class="c1"># 中心极限定理</span>
+<span class="k">def</span> <span class="nf">central_limit_theorem</span><span class="p">(</span><span class="n">proj_i</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">proj_i</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">n</span>
+    
+    <span class="c1"># 采样一些子集</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">proj_i</span><span class="p">,</span> <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    
+    <span class="c1"># 计算样本均值和标准差</span>
+    <span class="n">sample_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">sample_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># 标准化子集</span>
+    <span class="n">samples_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">samples</span> <span class="o">-</span> <span class="n">sample_mean</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span> <span class="o">/</span> <span class="n">sample_std</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+    
+    <span class="c1"># 将子集平均值加权平均</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">sample_std</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">weights_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+    <span class="n">proj_i_smoothed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="n">samples_norm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">weights_sum</span>
+    
+    <span class="k">return</span> <span class="n">proj_i_smoothed</span>
+
+<span class="c1"># FBP CT重建算法</span>
+<span class="k">def</span> <span class="nf">fbp</span><span class="p">(</span><span class="n">proj</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="c1"># 对每个投影进行中心极限定理平滑</span>
+    <span class="n">proj_smoothed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">proj</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">proj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">proj_smoothed</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">central_limit_theorem</span><span class="p">(</span><span class="n">proj</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span>
+    
+    <span class="c1"># 对每个投影进行雷登变换</span>
+    <span class="n">sinogram</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">proj_smoothed</span><span class="p">)</span>
+
+    <span class="c1"># 应用RAMP滤波器</span>
+    <span class="n">ramp_filter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">proj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+    <span class="n">filtered_sinogram</span> <span class="o">=</span> <span class="n">sinogram</span> <span class="o">*</span> <span class="n">ramp_filter</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+    <span class="c1"># 反变换得到重建图像</span>
+    <span class="n">filtered_proj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">filtered_sinogram</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="n">proj</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+<p>![img](data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2730%27%20height=%2730%27/%3e)<img alt="Kathy Chen" src="https://chat.openai.com/_next/image?url=https%3A%2F%2Flh3.googleusercontent.com%2Fa%2FAGNmyxaDYmERjMwydPr4csjMJ-5koyZ7nO9tH33CkB-F%3Ds96-c&amp;w=64&amp;q=75" /></p>
+<p>继续</p>
+</section>
+</section>
+<section id="id1">
+<h1>对每个投影进行中心极限定理平滑<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>proj_smoothed = np.zeros_like(proj) for i in range(proj.shape[0]): proj_smoothed[i, :] = central_limit_theorem(proj[i, :])</p>
+</section>
+<section id="id2">
+<h1>对每个投影进行雷登变换<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h1>
+<p>sinogram = np.apply_along_axis(np.fft.fft, 0, proj_smoothed)</p>
+</section>
+<section id="ramp">
+<h1>应用RAMP滤波器<a class="headerlink" href="#ramp" title="Permalink to this headline">#</a></h1>
+<p>ramp_filter = np.abs(np.linspace(-np.pi / 2, np.pi / 2, proj.shape[1], endpoint=False)) filtered_sinogram = sinogram * ramp_filter[:, np.newaxis, np.newaxis]</p>
+</section>
+<section id="id3">
+<h1>反变换得到重建图像<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h1>
+<p>filtered_proj = np.apply_along_axis(np.fft.ifft, 0, filtered_sinogram).real recon = fbp(filtered_proj, theta)</p>
+</section>
+<section id="id4">
+<h1>显示重建图像<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h1>
+<p>import matplotlib.pyplot as plt from mpl_toolkits.axes_grid1 import ImageGrid</p>
+<p>fig = plt.figure(figsize=(6, 6)) grid = ImageGrid(fig, 111, nrows_ncols=(1, 1), axes_pad=0.1)</p>
+<p>grid[0].imshow(recon, cmap=’gray’) grid[0].set_title(‘Reconstructed image’)</p>
+<p>plt.show()</p>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, kathy
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    </body>
+</html>

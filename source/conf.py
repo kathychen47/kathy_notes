@@ -11,8 +11,8 @@ import sys
 sys.path.insert(0, pathlib.Path(__file__).parents[2].resolve().as_posix())
 
 project = 'Learning Notes'
-copyright = '2023, lance'
-author = 'lance'
+copyright = '2023, kathy'
+author = 'kathy'
 release = '0.1'
 
 # -- General configuration ---------------------------------------------------

@@ -13,7 +13,8 @@ Contents
    css
    javascript
    markdown
-   /software_setting/Command
+   ./software_setting/Command
+   ./Computed_Tomography/Central_SliceTheroem
    :maxdepth: 2
    :caption: Contents:
 

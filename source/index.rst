@@ -9,13 +9,9 @@ Kathy Chen's Learning notes
 Contents
 --------
 .. toctree::
-   html
-   css
-   javascript
-   markdown
-   Computed_Tomography/index.rst
+   
    :maxdepth: 2
-   :caption: Contents:
-
-
+   :caption: Fields:
+   Computed_Tomography/index.rst
+   
 .. disqus::

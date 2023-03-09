@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Lance Wu's Learning notes
+Kathy Chen's Learning notes
 ===========================================
 
 Contents
@@ -13,6 +13,7 @@ Contents
    css
    javascript
    markdown
+   /software_setting/Command
    :maxdepth: 2
    :caption: Contents:
 

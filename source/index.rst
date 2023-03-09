@@ -13,12 +13,8 @@ Contents
    css
    javascript
    markdown
-   software_setting/
+
    Computed_Tomography/index.rst
    :maxdepth: 2
    :caption: Contents:
 
-
-
-Check out the :doc:`usage` section for further information, including how to
-:ref:`install <installation>` the project.
